@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#5B43C5" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>Said & Done</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell" aria-live="polite">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow" id="today-label">TODAY</p>
+          <h1>Tasks</h1>
+        </div>
+        <button class="icon-button" id="choose-date" aria-label="Choose a date"></button>
+      </header>
+
+      <section class="week-picker" aria-label="Choose day">
+        <button class="week-arrow" id="previous-week" aria-label="Previous week"></button>
+        <div class="days" id="days"></div>
+        <button class="week-arrow" id="next-week" aria-label="Next week"></button>
+      </section>
+
+      <section class="tasks-section" aria-labelledby="tasks-title">
+        <div class="section-heading"><h2 id="tasks-title">Your tasks</h2><span id="task-count"></span></div>
+        <div id="task-list" class="task-list"></div>
+        <button class="add-inline" id="open-add">Add a task</button>
+      </section>
+
+      <section class="chart-card" aria-labelledby="chart-title">
+        <div class="section-heading"><h2 id="chart-title">Completed tasks</h2><span id="week-total"></span></div>
+        <div class="chart" id="chart" role="img" aria-label="Completed tasks over the week"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button data-panel="events"><span class="nav-icon calendar-icon"></span><span>Events</span></button>
+      <button data-panel="notes"><span class="nav-icon note-icon"></span><span>Notes</span></button>
+      <button class="record-button" id="record" aria-label="Record a task or note"><span class="mic-icon"></span></button>
+      <button id="open-add-nav"><span class="nav-icon plus-icon"></span><span>Add</span></button>
+      <button data-panel="summary"><span class="nav-icon chart-icon"></span><span>Summary</span></button>
+    </nav>
+
+    <dialog id="dialog"><div id="dialog-content"></div></dialog>
+    <script src="./app.js" defer></script>
+  </body>
+</html>
