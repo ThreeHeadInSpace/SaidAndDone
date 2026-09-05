@@ -4,13 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#5B43C5" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Said & Done" />
+    <meta name="description" content="Say it once. Get it done. Voice-first tasks, events, and notes." />
     <title>Said & Done</title>
     <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512.png" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <!-- Onboarding -->
+    <div id="onboarding" class="onboarding hidden" hidden>
+      <div class="onboard-slide" data-step="0">
+        <div class="onboard-art dictate-art" aria-hidden="true"></div>
+        <p class="eyebrow">SAID & DONE</p>
+        <h1>Dictate it once</h1>
+        <p class="onboard-copy">Tap the mic and speak naturally — in English or Russian. We’ll turn your words into a task, event, or note.</p>
+      </div>
+      <div class="onboard-slide hidden" data-step="1" hidden>
+        <div class="onboard-art smart-art" aria-hidden="true"></div>
+        <p class="eyebrow">SMART DAY</p>
+        <h1>See your day clearly</h1>
+        <p class="onboard-copy">Pick any day in the week picker. Tasks stay dated, the chart shows real completions, and Summary keeps you honest.</p>
+      </div>
+      <div class="onboard-slide hidden" data-step="2" hidden>
+        <div class="onboard-art done-art" aria-hidden="true"></div>
+        <p class="eyebrow">DONE</p>
+        <h1>Add to Home Screen</h1>
+        <p class="onboard-copy">On iPhone: Share → <strong>Add to Home Screen</strong>. You’ll get a full-screen app with offline support.</p>
+        <ul class="onboard-tips">
+          <li>Events for birthdays & plans</li>
+          <li>Sticky notes for loose thoughts</li>
+          <li>Everything stays on this device</li>
+        </ul>
+      </div>
+      <div class="onboard-footer">
+        <div class="onboard-dots" id="onboard-dots" aria-hidden="true"></div>
+        <button class="primary-action" id="onboard-next">Continue</button>
+        <button class="text-action" id="onboard-skip">Skip</button>
+      </div>
+    </div>
+
     <main class="app-shell" aria-live="polite">
       <header class="app-header">
         <div>
@@ -27,26 +65,60 @@
       </section>
 
       <section class="tasks-section" aria-labelledby="tasks-title">
-        <div class="section-heading"><h2 id="tasks-title">Your tasks</h2><span id="task-count"></span></div>
+        <div class="section-heading">
+          <h2 id="tasks-title">Your tasks</h2>
+          <span id="task-count"></span>
+        </div>
         <div id="task-list" class="task-list"></div>
         <button class="add-inline" id="open-add">Add a task</button>
       </section>
 
       <section class="chart-card" aria-labelledby="chart-title">
-        <div class="section-heading"><h2 id="chart-title">Completed tasks</h2><span id="week-total"></span></div>
+        <div class="section-heading">
+          <h2 id="chart-title">Completed tasks</h2>
+          <span id="week-total"></span>
+        </div>
         <div class="chart" id="chart" role="img" aria-label="Completed tasks over the week"></div>
       </section>
     </main>
 
     <nav class="bottom-nav" aria-label="Main navigation">
-      <button data-panel="events"><span class="nav-icon calendar-icon"></span><span>Events</span></button>
-      <button data-panel="notes"><span class="nav-icon note-icon"></span><span>Notes</span></button>
-      <button class="record-button" id="record" aria-label="Record a task or note"><span class="mic-icon"></span></button>
-      <button id="open-add-nav"><span class="nav-icon plus-icon"></span><span>Add</span></button>
-      <button data-panel="summary"><span class="nav-icon chart-icon"></span><span>Summary</span></button>
+      <button type="button" data-panel="events">
+        <span class="nav-icon calendar-icon"></span><span>Events</span>
+      </button>
+      <button type="button" data-panel="notes">
+        <span class="nav-icon note-icon"></span><span>Notes</span>
+      </button>
+      <button type="button" class="record-button" id="record" aria-label="Record a task or note">
+        <span class="mic-icon"></span>
+      </button>
+      <button type="button" id="open-add-nav">
+        <span class="nav-icon plus-icon"></span><span>Add</span>
+      </button>
+      <button type="button" data-panel="summary">
+        <span class="nav-icon chart-icon"></span><span>Summary</span>
+      </button>
     </nav>
 
-    <dialog id="dialog"><div id="dialog-content"></div></dialog>
-    <script src="./app.js" defer></script>
+    <!-- Voice recording overlay -->
+    <div id="voice-overlay" class="voice-overlay hidden" hidden>
+      <div class="voice-panel">
+        <div class="voice-pulse" id="voice-pulse"></div>
+        <p class="eyebrow" id="voice-status">LISTENING</p>
+        <p class="voice-transcript" id="voice-transcript">Say a task, event, or note…</p>
+        <p class="voice-hint">EN · RU · “tomorrow at 3 call mom”</p>
+        <div class="voice-actions">
+          <button type="button" class="secondary-action" id="voice-cancel">Cancel</button>
+          <button type="button" class="primary-action" id="voice-stop">Done</button>
+        </div>
+        <button type="button" class="text-action" id="voice-type-fallback">Type instead</button>
+      </div>
+    </div>
+
+    <dialog id="dialog">
+      <div id="dialog-content"></div>
+    </dialog>
+
+    <script type="module" src="./app.js"></script>
   </body>
 </html>
