@@ -1,1 +1,32 @@
-{"name":"Said & Done","short_name":"Said & Done","start_url":"./","display":"standalone","background_color":"#fbfaff","theme_color":"#5b43c5","description":"Say it once. Get it done."}
+{
+  "name": "Said & Done",
+  "short_name": "Said & Done",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#fbfaff",
+  "theme_color": "#5b43c5",
+  "description": "Say it once. Get it done. Voice-first tasks, events, and notes.",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["productivity", "utilities"]
+}
